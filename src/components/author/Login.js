@@ -33,7 +33,7 @@ class Login extends Component {
                     this.setState({
                         loading: false
                     });
-                    console.log('Login successfull');
+                    console.log('Login successfull!');
                 })
                 .catch(err => {
                     this.setState({
