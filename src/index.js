@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import Login from './components/author/Login';
-import Register from './components/author/Register';
+import Login from './components/Author/Login';
+import Register from './components/Author/Register';
 import Spinner from './Spinner';
 import * as serviceWorker from './serviceWorker';
 import 'semantic-ui-css/semantic.min.css';
