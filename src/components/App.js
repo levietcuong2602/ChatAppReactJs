@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
-import './App.css';
 
+import './App.css';
 import ColorPanel from './ColorPanel/ColorPanel';
 import SlidePanel from './SlidePanel/SlidePanel';
 import Messages from './Messages/Messages';
