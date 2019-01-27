@@ -13,7 +13,7 @@ import firebase from './firebase';
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 import rootReducer from './reducers';
-import { setUser} from './actions'
+import { setUser, clearUser } from './actions'
 
 const store = createStore(rootReducer, composeWithDevTools());
 
@@ -28,11 +28,13 @@ class Root extends React.Component{
                 console.log(user);
                 this.props.setUser(user);
                 this.props.history.push('/');
+            } else {
+                this.props.clearUser();
+                this.props.history.push('/login');
             }
         });
     }
     render(){
-        console.log('props: ', this.props);
         return this.props.isLoading ? <Spinner /> : (
             <Switch>
                 <Route exact path='/' component={App}/>
@@ -44,7 +46,7 @@ class Root extends React.Component{
 }
 
 //connect: argument1: data in store, argument2: dispath action
-const RootWithAuthor = withRouter(connect(mapStateFromProps, { setUser })(Root));
+const RootWithAuthor = withRouter(connect(mapStateFromProps, { setUser, clearUser })(Root));
 
 ReactDOM.render(
     <Provider store={ store }>

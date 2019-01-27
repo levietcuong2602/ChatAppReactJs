@@ -12,8 +12,8 @@ class App extends Component {
   render() {
     return (
       <Grid columns='equal' style={{background: "#eeee"}} className='app'>
-          <ColorPanel />
           <SlidePanel />
+          <ColorPanel />
 
         <Grid.Column style={{background: "#fff", marginLeft: 320}}>
           <Messages />
