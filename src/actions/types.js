@@ -1,2 +1,6 @@
+// ACTION USERS
 export const SET_USER = 'SET_USER';
 export const CLEAT_USER = 'CLEAR_USER';
+
+// ACTION CHANEL
+export const SET_CURRENT_CHANEL = 'SET_CURRENT_CHANEL';
