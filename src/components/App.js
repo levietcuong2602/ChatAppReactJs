@@ -12,14 +12,14 @@ class App extends Component {
   render() {
     return (
       <Grid columns='equal' style={{background: "#eeee"}} className='app'>
-          <SlidePanel />
           <ColorPanel />
+          <SlidePanel />
 
         <Grid.Column style={{background: "#fff", marginLeft: 320}}>
           <Messages />
         </Grid.Column>
 
-        <Grid.Column style={{background: 'blue'}}>
+        <Grid.Column style={{background: 'blue'}} width={4}>
           <MetalPanel />
         </Grid.Column>
       </Grid>
