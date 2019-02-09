@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
 import { Segment, Comment } from 'semantic-ui-react';
+import firebase from '../../firebase';
+import { connect } from 'react-redux';
 
 import MessageHeader from './MessageHeader';
 import MessageForm from './MessageForm';
 
 class Messages extends Component {
+    state = {
+        messageRef: firebase.database().ref('messages'),
+        chanel: this.props.currentChanel,
+        user: this.props.currentUser,
+    }
+
     render() {
+        const { messageRef, chanel, user } = this.state;
         return (
             <React.Fragment>
                 {/* message header */}
                 <MessageHeader />
                 {/* message group */}
                 <Segment>
-                    <Comment.Group>
+                    <Comment.Group className='messages'>
                         <Comment>
                             <Comment.Avatar icon='code'/>
                             <Comment.Content>
@@ -29,10 +38,21 @@ class Messages extends Component {
                     </Comment.Group>
                 </Segment>
                 {/* message form */}
-                <MessageForm />
+                <MessageForm 
+                    messageRef={messageRef}
+                    currentChanel={chanel}
+                    currentUser={user}
+                />
             </React.Fragment>
         );
     }
 }
 
-export default Messages;
+const mapStateToProps = state => {
+    return {
+        currentChanel: state.chanel.currentChanel,
+        currentUser: state.user.currentUser,
+    }
+}
+
+export default connect(mapStateToProps)(Messages);
