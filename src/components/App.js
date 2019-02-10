@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 
 import './App.css';
 import ColorPanel from './ColorPanel/ColorPanel';
@@ -10,13 +11,22 @@ import MetalPanel from './MetalPanel/MetalPanel';
 
 class App extends Component {
   render() {
+    const{ currentUser, currentChanel } = this.props;
+
     return (
       <Grid columns='equal' style={{background: "#eeee"}} className='app'>
           <ColorPanel />
-          <SlidePanel />
+          <SlidePanel
+            key={currentUser && currentUser.uid}
+            currentUser={currentUser}
+          />
 
         <Grid.Column style={{background: "#fff", marginLeft: 320}}>
-          <Messages />
+          <Messages
+            key={currentChanel && currentChanel.id}
+            currentChanel={currentChanel}
+            currentUser={currentUser}
+          />
         </Grid.Column>
 
         <Grid.Column style={{background: 'blue'}} width={4}>
@@ -27,4 +37,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    currentChanel: state.chanel.currentChanel,
+    currentUser: state.user.currentUser,
+  }
+}
+
+export default connect(mapStateToProps)(App);

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import firebase from '../../firebase';
-import { connect } from 'react-redux';
 import { Grid, Header, Icon, Dropdown, Image } from 'semantic-ui-react';
+import firebase from '../../firebase';
 
 class UserPanel extends Component {
     state = {
@@ -66,10 +65,4 @@ class UserPanel extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        currentUser: state.user.currentUser
-    }
-}
-
-export default connect(mapStateToProps)(UserPanel);
+export default UserPanel;

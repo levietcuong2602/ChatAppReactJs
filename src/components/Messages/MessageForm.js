@@ -18,13 +18,12 @@ class MessageForm extends Component {
         const message = {
             timestamp: firebase.database.ServerValue.TIMESTAMP,
             user: {
-                id: this.state.user.id,
+                id: this.state.user.uid,
                 name: this.state.user.displayName,
-                avata: this.state.user.photoURL 
+                avatar: this.state.user.photoURL 
             },
             content: this.state.message
         }
-
         return message;
     }
 
@@ -39,6 +38,7 @@ class MessageForm extends Component {
                 .push()
                 .set(this.createMessage())
                 .then(() => {
+                    console.log('Sended message');
                     this.setState({ loading: false, message: '', errors: []});
                 })
                 .catch(err => {
@@ -52,7 +52,7 @@ class MessageForm extends Component {
     }
 
     render() {
-        const { errors } = this.state;
+        const { errors, message, loading } = this.state;
 
         return (
             <Segment className='message__form'>
@@ -62,6 +62,7 @@ class MessageForm extends Component {
                     label={ <Button icon='add'/>}
                     labelPosition='left'
                     name='message'
+                    value={message}
                     style={{ marginBottom: '0.7rem'}}
                     onChange={this.handleChange}
                 />
@@ -71,12 +72,13 @@ class MessageForm extends Component {
                         labelPosition='left'
                         content='Add Reply'
                         color='orange'
+                        disabled={loading}
                         onClick={this.sendMessage}
                         className={
-                            errors.some(error => error.inlcues('message')) ? 'error' : ''
+                            errors.some(error => error.message.includes('message')) ? 'error' : ''
                         }
                     />
-                    <Button 
+                    <Button
                         icon='upload'
                         labelPosition='right'
                         content='Upload Media'

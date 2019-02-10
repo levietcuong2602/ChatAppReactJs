@@ -6,7 +6,7 @@ class MessageHeader extends Component {
         return (
             <Segment clearing style={{ paddingBottom: 0 }}>
                 {/* chanel title */}
-                <Header as='h2' fluid floated='left'>
+                <Header as='h2' fluid='true' floated='left'>
                     <span>
                         Chanel Title
                         <Icon name='star outline' color='black'/>
