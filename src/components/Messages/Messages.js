@@ -26,6 +26,12 @@ class Messages extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.removeListener();
+    }
+
+    removeListener = () => this.state.messageRef.off();
+
     addListeners = chanelId => {
         this.addMessagesListeners(chanelId);
     }
@@ -34,8 +40,6 @@ class Messages extends Component {
         const loadedMessages = [];
         this.state.messageRef.child(chanelId).on('child_added', snaps =>{
             loadedMessages.push(snaps.val());
-            console.log(loadedMessages)
-
             this.setState({
                 messages: loadedMessages,
                 messageLoading: false
