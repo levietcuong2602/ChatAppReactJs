@@ -154,6 +154,7 @@ class MessageForm extends Component {
                     />
                     <Button
                         icon='upload'
+                        disabled={uploadState==='uploading'}
                         onClick={this.openModal}
                         labelPosition='right'
                         content='Upload Media'
