@@ -17,6 +17,9 @@ class Messages extends Component {
             user: this.props.currentUser,
             progressBar: false,
             numUniqueUsers: '',
+            searchTerm: '',
+            searchLoading: false,
+            searchResults: [],
         }
     }
 
@@ -80,8 +83,29 @@ class Messages extends Component {
 
     displayChannelName = (channel) => channel ? channel.name : '';
 
+    handleMessageSearch = () => {
+        const chanelMessages = [...this.state.messages];
+        const regex = new RegExp(this.state.searchTerm, 'gi');
+        const searchResults = chanelMessages.reduce((acc, message) => {
+            if (message.content && message.content.match(regex) || message.user.name.match(regex)) {
+                acc.push(message);
+           }
+           return acc;
+        }, []);
+        this.setState({searchResults});
+        setTimeout(this.setState({ searchLoading: false }), 1000);
+    }
+
+    handleSearchChange = event => {
+        this.setState({
+            searchTerm: event.target.value,
+            searchLoading: true
+        }, () => this.handleMessageSearch());
+    }
+
     render() {
-        const { messageRef, user, chanel, messages, progressBar, numUniqueUsers } = this.state;
+        const { messageRef, user, chanel, messages, progressBar, numUniqueUsers, 
+        searchTerm, searchResults, searchLoading } = this.state;
         
         return (
             <React.Fragment>
@@ -89,11 +113,13 @@ class Messages extends Component {
                 <MessageHeader 
                     chanelName={this.displayChannelName(chanel)}
                     numUniqueUsers={numUniqueUsers}
+                    handleSearchChange={this.handleSearchChange}
+                    searchLoading={searchLoading}
                 />
                 {/* message group */}
                 <Segment>
                     <Comment.Group className={progressBar ? 'messages__progress' : 'messages'}>
-                        {this.displayMessages(messages)}
+                        {searchTerm ? this.displayMessages(searchResults) : this.displayMessages(messages)}
                     </Comment.Group>
                 </Segment>
                 {/* message form */}
