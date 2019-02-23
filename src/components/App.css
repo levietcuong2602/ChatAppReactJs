@@ -5,6 +5,11 @@ html, body,
     padding: 1em;
 }
 
+/* SlidePanel.js */
+.menu {
+    padding-bottom: 2em;
+}
+
 /* Messages */
 .messages {
     height: 63vh;

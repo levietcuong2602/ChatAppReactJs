@@ -87,7 +87,7 @@ class Messages extends Component {
         const chanelMessages = [...this.state.messages];
         const regex = new RegExp(this.state.searchTerm, 'gi');
         const searchResults = chanelMessages.reduce((acc, message) => {
-            if (message.content && message.content.match(regex) || message.user.name.match(regex)) {
+            if (message.content && (message.content.match(regex) || message.user.name.match(regex))) {
                 acc.push(message);
            }
            return acc;
