@@ -18,7 +18,7 @@ class SlidePanel extends Component {
             >
                 <UserPanel currentUser={currentUser}/>
                 <Chanels />
-                <DrirectMessages />
+                <DrirectMessages currentUser={currentUser}/>
             </Menu>
         );
     }
